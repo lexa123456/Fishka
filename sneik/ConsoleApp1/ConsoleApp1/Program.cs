@@ -15,7 +15,7 @@ namespace ConsoleApp1
         int _snake_X;
         int _snake_Y;
         Random random = new Random();
-        
+
 
         public Game(int w, int h)
         {
@@ -26,9 +26,9 @@ namespace ConsoleApp1
             _snake_X = random.Next(1, _w - 2);
             _snake_Y = random.Next(1, _h - 2);
         }
-       public void Snakeleft()
+        public void Snakeleft()
         {
-           
+
             if (_snake_X > 1)
             {
                 --_snake_X;
@@ -37,9 +37,9 @@ namespace ConsoleApp1
         }
         public void Snakeright()
         {
-           
 
-            if (_snake_X < _w-2)
+
+            if (_snake_X < _w - 2)
             {
                 ++_snake_X;
             }
@@ -47,8 +47,8 @@ namespace ConsoleApp1
         }
         public void Snakedown()
         {
-            
-            if (_snake_Y < _h-1)
+
+            if (_snake_Y < _h - 1)
             {
                 ++_snake_Y;
             }
@@ -56,21 +56,31 @@ namespace ConsoleApp1
         }
         public void Snakeup()
         {
-            
+
             if (_snake_Y > 1)
             {
                 --_snake_Y;
             }
         }
+        public bool Isfructeatet()
+        {
+            if ((_frute_X  == _snake_X) && (_frute_Y == _snake_Y))
+            {
+                return true;
+            } else
+            return false; 
+        }
+   
+        
         public void DrawFruit()
         {
             Console.SetCursorPosition(_frute_X, _frute_Y);
-            Console.Write("Q");
+            Console.Write("T");
         }
         public void DrawSnake()
         {
             Console.SetCursorPosition(_snake_X, _snake_Y);
-            Console.Write("R");
+            Console.Write("A");
         }
 
         public void DrawFeild()
@@ -91,8 +101,9 @@ namespace ConsoleApp1
                 Console.SetCursorPosition(_w - 1, c);
                 Console.Write("#");
             }
-
+            
         }
+        
     }
     class Program
     {
@@ -107,12 +118,14 @@ namespace ConsoleApp1
             int h = Int32.Parse(mass[1]);
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             Game game = new Game(w, h);
-            while (true)
+            while (!game.Isfructeatet())
             {
                 Console.Clear();
                 game.DrawFeild();
                 game.DrawFruit();
                 game.DrawSnake();
+                System.Threading.Thread.Sleep(200);
+
                 Console.SetCursorPosition(0, h + 1);
                 switch (key.Key)
                 {
@@ -133,12 +146,12 @@ namespace ConsoleApp1
                         game.Snakeright();
                         break;
                 }
+
                 if (Console.KeyAvailable)
                 {
                     key = Console.ReadKey();
 
                 }
-                System.Threading.Thread.Sleep(200);
             }
 
         }
