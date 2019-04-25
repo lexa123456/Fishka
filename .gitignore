@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/sneik/ConsoleApp1/.vs
+/sneik/ConsoleApp1/desktop.ini
+/sneik/ConsoleApp1/ConsoleApp1/bin/Debug
+/sneik/ConsoleApp1/ConsoleApp1/bin
+/sneik/desktop.ini
+*.ini
+/sneik/ConsoleApp1/ConsoleApp1/obj/Debug
