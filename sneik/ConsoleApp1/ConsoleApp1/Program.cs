@@ -8,6 +8,9 @@ namespace ConsoleApp1
 {
     class Game
     {
+        Feild _f;
+        
+
         int _w;
         int _h;
         int _frute_X;
@@ -25,6 +28,7 @@ namespace ConsoleApp1
             _frute_Y = random.Next(1, _h - 2);
             _snake_X = random.Next(1, _w - 2);
             _snake_Y = random.Next(1, _h - 2);
+            _f = new Feild();
         }
         public void Snakeleft()
         {
@@ -64,14 +68,15 @@ namespace ConsoleApp1
         }
         public bool Isfructeatet()
         {
-            if ((_frute_X  == _snake_X) && (_frute_Y == _snake_Y))
+            if ((_frute_X == _snake_X) && (_frute_Y == _snake_Y))
             {
                 return true;
-            } else
-            return false; 
+            }
+            else
+                return false;
         }
-   
-        
+
+
         public void DrawFruit()
         {
             Console.SetCursorPosition(_frute_X, _frute_Y);
@@ -82,28 +87,15 @@ namespace ConsoleApp1
             Console.SetCursorPosition(_snake_X, _snake_Y);
             Console.Write("A");
         }
-
-        public void DrawFeild()
+        public void Draw()
         {
-
-            for (int i = 0; i < _w; i++)
-            {
-                Console.SetCursorPosition(i, 0);
-                Console.Write("#");
-                Console.SetCursorPosition(i, _h);
-                Console.Write("#");
-
-            }
-            for (int c = 1; c < _h; c++)
-            {
-                Console.SetCursorPosition(0, c);
-                Console.Write("#");
-                Console.SetCursorPosition(_w - 1, c);
-                Console.Write("#");
-            }
-            
+            DrawFruit();
+            DrawSnake();
+            _f.Draw(_w, _h);
         }
         
+       
+
     }
     class Program
     {
@@ -121,7 +113,9 @@ namespace ConsoleApp1
             while (!game.Isfructeatet())
             {
                 Console.Clear();
-                game.DrawFeild();
+                game.Draw();
+                
+                
                 game.DrawFruit();
                 game.DrawSnake();
                 System.Threading.Thread.Sleep(200);
@@ -154,6 +148,31 @@ namespace ConsoleApp1
                 }
             }
 
+        }
+    }
+    class Feild
+    {
+        public void Draw(int w, int h)
+        {
+            
+
+                for (int i = 0; i < w; i++)
+                {
+                    Console.SetCursorPosition(i, 0);
+                    Console.Write("#");
+                    Console.SetCursorPosition(i, h);
+                    Console.Write("#");
+
+                }
+                for (int c = 1; c < h; c++)
+                {
+                    Console.SetCursorPosition(0, c);
+                    Console.Write("#");
+                    Console.SetCursorPosition(w - 1, c);
+                    Console.Write("#");
+                }
+
+            
         }
     }
 }
